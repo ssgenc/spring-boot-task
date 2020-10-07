@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.accenture.springtask.exception.UserNotFoundException;
 import com.accenture.springtask.model.User;
 import com.accenture.springtask.service.UserDaoService;
 
@@ -33,6 +34,9 @@ public class UserResourceController {
 	@GetMapping("/users/{id}")
 	public User getUser(@PathVariable int id) {
 		User user = service.findUserById(id);
+		if(user  == null) {
+			throw new UserNotFoundException("id: "+id);
+		}
 		return user;
 	}
 
@@ -51,8 +55,11 @@ public class UserResourceController {
 	
 	@DeleteMapping("/users/{id}")
 	public void deleteUserById(@PathVariable int id) {
-		service.deleteUserById(id);
+		User user = service.deleteUserById(id);
 		
+		if (user == null) {
+			throw new UserNotFoundException("id: " + id);
+		}
 	}
 
 }
