@@ -2,11 +2,17 @@ package com.accenture.springtask.model;
 
 import java.util.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
 
+@Entity
 public class User {
 	
+	@Id
+	@GeneratedValue
 	private Integer id;
 	@Size(min = 2, message = "Name should should have min. 2 chars!")
 	private String name;
