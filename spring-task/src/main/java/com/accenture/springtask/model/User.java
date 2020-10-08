@@ -23,6 +23,9 @@ public class User {
 		return id;
 
 	}
+	
+	public User() {
+	}
 
 	public User(Integer id, String name, Date birthDate) {
 		super();
